@@ -15,9 +15,10 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 def create_string_by_monitored_actions(user_id):
     return ", ".join(USUARIOS_INTERESSADOS[user_id])
 
-def check_and_add_to_user(user_id):
+async def check_and_add_to_user(user_id, client):
     if user_id not in USUARIOS_INTERESSADOS.keys():
         USUARIOS_INTERESSADOS[user_id] = []
+        await client.send_message(user_id, f"Você foi inserido na lista de usuários do Act Mercatus.")
         return False
     
 
@@ -35,8 +36,8 @@ if __name__ == '__main__':
         palavras = mensagem.split()
         user_id = event.message.peer_id.user_id
 
-        rp = check_and_add_to_user(user_id)
-        if rp is False: await client.send_message(user_id, f"Você foi inserido na lista de usuários do Act Mercatus.")
+        rp = await check_and_add_to_user(user_id, client)
+        # if rp is False: await client.send_message(user_id, f"Você foi inserido na lista de usuários do Act Mercatus.")
             
             
         if len(palavras) == 2:
@@ -53,8 +54,8 @@ if __name__ == '__main__':
     async def checar_acoes(event):
         user_id = event.message.peer_id.user_id
 
-        rp = check_and_add_to_user(user_id)
-        if rp is False: await client.send_message(user_id, f"Você foi inserido na lista de usuários do Act Mercatus.")
+        rp = await check_and_add_to_user(user_id, client)
+        # if rp is False: await client.send_message(user_id, f"Você foi inserido na lista de usuários do Act Mercatus.")
 
         acoes = create_string_by_monitored_actions(user_id)
         await client.send_message(user_id, f"Ações monitoradas atualmente: {acoes}")
