@@ -3,3 +3,4 @@ venv
 act_mercatus\.env
 .env
 *.session-journal
+*.pyc

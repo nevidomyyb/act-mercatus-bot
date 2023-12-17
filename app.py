@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 import os
 # from apscheduler.triggers.interval import IntervalTrigger
 # from mod.scheduler import create_scheduler
-import schedule
 
 USUARIOS_INTERESSADOS = {
 }
