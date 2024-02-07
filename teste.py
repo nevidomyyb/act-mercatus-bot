@@ -1,5 +1,6 @@
 from time import sleep
 import multiprocessing
+import yfinance as yf
 
 def run_loop_1():
     c = 0
@@ -22,13 +23,25 @@ def run_loop_2():
         
     print("O loop 2 acabou")
 
-if __name__ == "__main__":
-    with multiprocessing.Manager() as manager:
-        processo1 = multiprocessing.Process(target=run_loop_1)
-        processo1.start()
+# if __name__ == "__main__":
+#     with multiprocessing.Manager() as manager:
+#         processo1 = multiprocessing.Process(target=run_loop_1)
+#         processo1.start()
         
-        processo2 = multiprocessing.Process(target=run_loop_2)
-        processo2.start()
+#         processo2 = multiprocessing.Process(target=run_loop_2)
+#         processo2.start()
         
-        processo1.join()
-        processo2.join()
+#         processo1.join()
+#         processo2.join()
+
+def check_act(act_symbol):
+
+    try:
+        ticker = yf.Ticker(act_symbol)
+        data = ticker.info
+        return data
+    except:
+        print(f"{act_symbol} não encontrado")
+        return False
+    
+print(check_act("BRL"))

@@ -1,4 +1,4 @@
-from .act import check_act
+from .utils import check_act
 from time import sleep
 from telethon.sync import TelegramClient
 
