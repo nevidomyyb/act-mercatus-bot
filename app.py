@@ -92,7 +92,7 @@ def run_client(client_name: str):
             fail_string = create_fail_remove_paper_string(fails)
             response_string+=fail_string
         if len(successes.keys()) != 0 :
-            response_string+= f"\nAs seguintes ações foram removidas com sucesso: {', '.join(successes.keys())}"
+            response_string+= f"\n\nAs seguintes ações foram removidas com sucesso: {', '.join(successes.keys())}"
         await client.send_message(user_id, response_string)
             
                 
